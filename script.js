@@ -1,228 +1,413 @@
 $(document).ready(function () {    
+    const questionsForQuiz = 10;
     const json = {
         "questions" : [
             {
-                "question": "Das ist eine sehr lange Frage, die gefühlt niemals endet. Unter diesen Bedingungen sollte die Frage sich über mehrere Zeilen erstrecken und viel Platz einnehmen. Damit wird getestet wie sich die Zeilenumbrüche auf das Format auswirken. Und jetzt zur Lösung dieser Frage: es könnte sein, dass Antwort 1 Stimmt - das kann aber nur möglich sein, wenn alle anderen Antworten Falsch sind. Aber glaube mir... es ist Antwort 1. Vertraust du mir?",
+                "question": "Was ist 5+4?",
                 "right_answers": [
-                    "Das ist eine mittellange Antwort (falsche)"
+                    "9"
                 ],
                 "wrong_answers": [
-                    "richtig", 
-                    "Eine ewig lange falsche Antwort, ohne wirklich viel Inhalt - so wie Seppls Schädel", 
-                    "falsch", 
+                    "13", 
+                    "1", 
+                    "null"
                 ]
             },
             {
-                "question": "2te Frage?",
+                "question": "Wie viele Monde hat Jupiter?",
                 "right_answers": [
-                    "1te richtige Antwort"
+                    "79"
                 ],
                 "wrong_answers": [
-                    "1te falsche Antwort", 
-                    "2te falsche Antwort", 
-                    "3te falsche Antwort", 
+                    "13", 
+                    "1", 
+                    "34"
                 ]
             },
             {
-                "question": "3te Frage?",
+                "question": "Was ergibt \"'b'+'a'+ +'a'+'a'\" in javascript?",
                 "right_answers": [
-                    "1te richtige Antwort"
+                    "baNaNa"
                 ],
                 "wrong_answers": [
-                    "1te falsche Antwort", 
-                    "2te falsche Antwort", 
-                    "3te falsche Antwort", 
+                    "baNANa", 
+                    "Es wirft einen Fehler", 
+                    "Es wird ignoriert"
                 ]
             },
             {
-                "question": "4te Frage?",
+                "question": "Wann hat der zweite Weltkrieg begonnen?",
                 "right_answers": [
-                    "1te richtige Antwort"
+                    "1939"
                 ],
                 "wrong_answers": [
-                    "1te falsche Antwort", 
-                    "2te falsche Antwort", 
-                    "3te falsche Antwort", 
+                    "1918", 
+                    "1928", 
+                    "1940"
                 ]
             },
             {
-                "question": "5te Frage?",
+                "question": "Wie alt wurde Einstein?",
                 "right_answers": [
-                    "1te richtige Antwort"
+                    "76"
                 ],
                 "wrong_answers": [
-                    "1te falsche Antwort", 
-                    "2te falsche Antwort", 
-                    "3te falsche Antwort", 
+                    "86", 
+                    "66", 
+                    "69"
                 ]
             },
             {
-                "question": "6te Frage?",
+                "question": "Wie viele Kanten hat ein Würfel?",
                 "right_answers": [
-                    "1te richtige Antwort"
+                    "12"
                 ],
                 "wrong_answers": [
-                    "1te falsche Antwort", 
-                    "2te falsche Antwort", 
-                    "3te falsche Antwort", 
+                    "6", 
+                    "8", 
+                    "12"
                 ]
             },
             {
-                "question": "7te Frage?",
+                "question": "Was ist die richtige Schreibweise?",
                 "right_answers": [
-                    "1te richtige Antwort"
+                    "Portemonnaie"
                 ],
                 "wrong_answers": [
-                    "1te falsche Antwort", 
-                    "2te falsche Antwort", 
-                    "3te falsche Antwort", 
+                    "Portmonne", 
+                    "Portmonnae", 
+                    "Portmonnee"
                 ]
             },
             {
-                "question": "8te Frage?",
+                "question": "Was ist die Aufgabe der Milz?",
                 "right_answers": [
-                    "1te richtige Antwort"
+                    "Filtert das Blut"
                 ],
                 "wrong_answers": [
-                    "1te falsche Antwort", 
-                    "2te falsche Antwort", 
-                    "3te falsche Antwort", 
+                    "Wandelt Nährstoffe in für den Körper brauchbare Stoffe um", 
+                    "Regelt die Flüssigkeitshaushalte", 
+                    "Produktion und Freisetzung der beiden Hormone T3 und T4"
                 ]
             },
             {
-                "question": "9te Frage?",
+                "question": "Was ist die Aufgabe der Schilddrüse?",
                 "right_answers": [
-                    "1te richtige Antwort"
+                    "Produktion und Freisetzung der beiden Hormone T3 und T4"
                 ],
                 "wrong_answers": [
-                    "1te falsche Antwort", 
-                    "2te falsche Antwort", 
-                    "3te falsche Antwort", 
+                    "Filtert das Blut", 
+                    "Wandelt Nährstoffe in für den Körper brauchbare Stoffe um", 
+                    "Rudimentäres Organ"
                 ]
             },
             {
-                "question": "10te Frage?",
+                "question": "Was ist die Aufgabe der Leber?",
                 "right_answers": [
-                    "1te richtige Antwort"
+                    "Wandelt Nährstoffe in für den Körper brauchbare Stoffe um"
                 ],
                 "wrong_answers": [
-                    "1te falsche Antwort", 
-                    "2te falsche Antwort", 
-                    "3te falsche Antwort", 
+                    "Filtert das Blut", 
+                    "Produktion und Freisetzung der beiden Hormone T3 und T4", 
+                    "Lediglich da um Krebs zu bekommen"
                 ]
             },
             {
-                "question": "11te Frage?",
+                "question": "Wer hat das AOE2:DE Turnier \"Red Bull Wololo: Legacy 2022\" gewonnen?",
                 "right_answers": [
-                    "1te richtige Antwort"
+                    "TaToH"
                 ],
                 "wrong_answers": [
-                    "1te falsche Antwort", 
-                    "2te falsche Antwort", 
-                    "3te falsche Antwort", 
+                    "Liereyy", 
+                    "MbL", 
+                    "TheViper"
                 ]
             },
             {
-                "question": "12te Frage?",
+                "question": "Was ist der kleinste Bezirk in Wien?",
                 "right_answers": [
-                    "1te richtige Antwort"
+                    "Josefstadt"
                 ],
                 "wrong_answers": [
-                    "1te falsche Antwort", 
-                    "2te falsche Antwort", 
-                    "3te falsche Antwort", 
+                    "Innenstadt", 
+                    "Doanustadt", 
+                    "Neubau"
                 ]
             },
             {
-                "question": "13te Frage?",
+                "question": "Wie viele Kilometer ist ein AE?",
                 "right_answers": [
-                    "1te richtige Antwort"
+                    "149.597.870"
                 ],
                 "wrong_answers": [
-                    "1te falsche Antwort", 
-                    "2te falsche Antwort", 
-                    "3te falsche Antwort", 
+                    "314.159.265", 
+                    "359.884.159", 
+                    "194.179.003"
                 ]
             },
             {
-                "question": "14te Frage?",
+                "question": "Was ist das schnellste Tier der Welt?",
                 "right_answers": [
-                    "1te richtige Antwort"
+                    "Gepard"
                 ],
                 "wrong_answers": [
-                    "1te falsche Antwort", 
-                    "2te falsche Antwort", 
-                    "3te falsche Antwort", 
+                    "Leopard", 
+                    "Panther", 
+                    "Maus"
+                ]
+            },
+            {
+                "question": "Wer war Hirohito?",
+                "right_answers": [
+                    "Japanisches Staatsoberhaupt (1926-1989)"
+                ],
+                "wrong_answers": [
+                    "Japanischer Wissenschaftler (1820-1889)", 
+                    "Koreanischer Schriftsteller (1699-1760)", 
+                    "Koreanischer Sportler (1970-2021)"
+                ]
+            },
+            {
+                "question": "Wann wurde das Spiel CS:GO veröffentlicht?",
+                "right_answers": [
+                    "21.August 2012"
+                ],
+                "wrong_answers": [
+                    "20.August 2012", 
+                    "19.August 2012", 
+                    "18.August 2012"
+                ]
+            },
+            {
+                "question": "Wer hat Penicilin entdeckt?",
+                "right_answers": [
+                    "Alexander Fleming"
+                ],
+                "wrong_answers": [
+                    "Albert Einstein", 
+                    "Günther van Vliet", 
+                    "Sigmund Freud"
+                ]
+            },
+            {
+                "question": "Wie viele Zähne hat ein erwachsener Mensch?",
+                "right_answers": [
+                    "32"
+                ],
+                "wrong_answers": [
+                    "30", 
+                    "28", 
+                    "29"
+                ]
+            },
+            {
+                "question": "Was war technisch gesehen die schnellste Dampflok?",
+                "right_answers": [
+                    "Blauer Peter"
+                ],
+                "wrong_answers": [
+                    "Roter Andi", 
+                    "Grüner Bert", 
+                    "Mallard"
+                ]
+            },
+            {
+                "question": "Wie lang war das Rohr vom schweren Gustav?",
+                "right_answers": [
+                    "32 m"
+                ],
+                "wrong_answers": [
+                    "80 cm", 
+                    "4 m", 
+                    "12 mm"
                 ]
             }
         ]
     }
-    const questions = shuffle(json.questions.slice());
-
-    var index = 0;
-    var currentRightAnswer = 0;
-    var rightAnswers = 0;
+    var questionInfo;
+    var questions;
+    var answers;
+    var rightAnswers;
+    var givenAnswers;
+    var index;
     
     const startButton = $('#start-quiz-button');
     const answer1Button = $('#answer1-button');
     const answer2Button = $('#answer2-button');
     const answer3Button = $('#answer3-button');
     const answer4Button = $('#answer4-button');
+    const previousButton = $('#previous-button');
+    const endButton = $('#end-button');
+    const nextButton = $('#next-button');
     const saveButton = $('#save-button');
     const loadButton = $('#load-button');
+    const restartButton = $('#restart-button');
     
     const progressBar = $("#progressbar-quiz");
 
+    const quizOverviewSection = $('#quiz-overview');
     const answerButtonsSection = $('#answer-buttons');
 
     const questionLabel = $('#question');
 
+    init();
     answerButtonsSection.hide();
     $('#body').css('visibility', 'visible');
     
     startButton.click(startQuiz);
-    answer1Button.click(() => { if(currentRightAnswer == 0) { rightAnswers++; } answerClick(); });
-    answer2Button.click(() => { if(currentRightAnswer == 1) { rightAnswers++; } answerClick(); });
-    answer3Button.click(() => { if(currentRightAnswer == 2) { rightAnswers++; } answerClick(); });
-    answer4Button.click(() => { if(currentRightAnswer == 3) { rightAnswers++; } answerClick(); });
+    previousButton.click(() => { index = index - 2; if (index < 0) { index = 0; } answerClick(); });
+    nextButton.click(() => { answerClick(); });
+    endButton.click();
+    answer1Button.click(() => { givenAnswers[index - 1] = 0; answerClick(); });
+    answer2Button.click(() => { givenAnswers[index - 1] = 1; answerClick(); });
+    answer3Button.click(() => { givenAnswers[index - 1] = 2; answerClick(); });
+    answer4Button.click(() => { givenAnswers[index - 1] = 3; answerClick(); });
+    restartButton.click(() => { init(); answerClick(); });
+    endButton.click(() => { calculateResult(); });
     
-    function startQuiz() {
-        answerButtonsSection.show('slow');
-        startButton.hide();
+    function init() {
+        endButton.hide();
+        quizOverviewSection.show();
+        answerButtonsSection.show();
+        previousButton.show();
+        nextButton.show();
+        saveButton.show();
+        loadButton.show();
 
+        questionInfo = shuffle(json.questions).slice(questionsForQuiz);
+        questions = new Array(questionsForQuiz);
+        answers = new Array(questionsForQuiz);
+        rightAnswers = new Array(questionsForQuiz);
+        givenAnswers = new Array(questionsForQuiz);
+    
+        for (var i = 0; i < questionInfo.length; i++) {
+            questions[i] = questionInfo[i].question;
+            var tempAnswers = shuffle($.merge(questionInfo[i].right_answers.slice(), questionInfo[i].wrong_answers.slice()).slice());
+            answers[i] = new Array(4);
+            for (var j = 0; j < 4; j++) {
+                answers[i][j] = tempAnswers[j];
+                if (answers[i][j] === questionInfo[i].right_answers[0]) {
+                    rightAnswers[i] = j;
+                }
+            }
+        }
+    
+        index = 0;
+    }
+
+    function startQuiz() {
+        startButton.hide();
+        answerButtonsSection.show('slow');
         updateAnswers();
-        console.log(currentRightAnswer);
     }
 
     function answerClick() {
         updateAnswers();
-        updateProgress();
-        console.log("current score: " + rightAnswers);
-        console.log("next right answer: " + currentRightAnswer);
+        console.log(givenAnswers);
     }
 
-    function updateProgress() {
-        var percent = (index - 1) * 10;
+    function updateProgress(percent) {
         progressBar.css('width', percent + "%");
         progressBar.html(percent + "%");
     }
 
     function updateAnswers() {
-        var currQuestion = questions[index];
-        var answers = shuffle($.merge(currQuestion.right_answers, currQuestion.wrong_answers).slice());
-        for (i = 0; i < answers.length; i++) {
-            if(answers[i] === currQuestion.right_answers[0]) {
-                currentRightAnswer = i;
-                break;
+        if (index == 10) {
+            endButton.show();
+            updateProgress(answeredQuestionsCount() * (100 / questionsForQuiz));
+            toggleButtons(index - 1);
+
+            return;
+        }
+
+        questionLabel.html(questions[index]);
+        answer1Button.html(answers[index][0]);
+        answer2Button.html(answers[index][1]);
+        answer3Button.html(answers[index][2]);
+        answer4Button.html(answers[index][3]);
+        updateProgress(answeredQuestionsCount() * (100 / questionsForQuiz));
+
+        index++;
+        toggleButtons(index - 1);
+    }
+
+    function answeredQuestionsCount() {
+        var temp = 0;
+        for (var i = 0; i < givenAnswers.length; i++) {
+            if (givenAnswers[i] != null) {
+                temp++;
             }
         }
-        index++;
 
-        questionLabel.html(currQuestion.question);
-        answer1Button.html(answers[0]);
-        answer2Button.html(answers[1]);
-        answer3Button.html(answers[2]);
-        answer4Button.html(answers[3]);
+        return temp;
+    }
+
+    function toggleButtons(idx) {
+        answer1Button.removeClass("btn-outline-success");
+        answer2Button.removeClass("btn-outline-danger");
+        answer3Button.removeClass("btn-outline-warning");
+        answer4Button.removeClass("btn-outline-info");
+        answer1Button.removeClass("btn-success");
+        answer2Button.removeClass("btn-danger");
+        answer3Button.removeClass("btn-warning");
+        answer4Button.removeClass("btn-info");
+        switch (givenAnswers[idx]) {
+            case 0:
+                answer2Button.addClass("btn-outline-danger");
+                answer3Button.addClass("btn-outline-warning");
+                answer4Button.addClass("btn-outline-info");
+                answer1Button.addClass("btn-success");
+            break;
+            case 1:
+                answer1Button.addClass("btn-outline-success");
+                answer3Button.addClass("btn-outline-warning");
+                answer4Button.addClass("btn-outline-info");
+                answer2Button.addClass("btn-danger");
+            break;
+            case 2:
+                answer1Button.addClass("btn-outline-success");
+                answer2Button.addClass("btn-outline-danger");
+                answer4Button.addClass("btn-outline-info");
+                answer3Button.addClass("btn-warning");
+            break;
+            case 3:
+                answer1Button.addClass("btn-outline-success");
+                answer2Button.addClass("btn-outline-danger");
+                answer3Button.addClass("btn-outline-warning");
+                answer4Button.addClass("btn-info");
+            break;
+            default:
+                answer1Button.addClass("btn-outline-success");
+                answer2Button.addClass("btn-outline-danger");
+                answer3Button.addClass("btn-outline-warning");
+                answer4Button.addClass("btn-outline-info");
+            break;
+        }
+    }
+
+    function calculateResult(){
+        quizOverviewSection.hide();
+        answerButtonsSection.hide();
+        previousButton.hide();
+        endButton.hide();
+        nextButton.hide();
+        saveButton.hide();
+        loadButton.hide();
+
+        var correctAnswers = 0;
+        var answersResult = "";
+        for (var i = 0; i < questionsForQuiz; i++) {
+            answersResult += "<br><br><br>question " + (i + 1) + ": " + questions[i];
+            answersResult += "<br>your answer: " + answers[i][givenAnswers[i]];
+            answersResult += "<br>rigth answer: " + answers[i][rightAnswers[i]];
+            if (rightAnswers[i] == givenAnswers[i]) {
+                correctAnswers++;
+            }
+        }
+
+        var result = "You have answered " + correctAnswers + " out of " + questionsForQuiz + " correct!";
+
+        questionLabel.html(result + answersResult);
     }
 
 
