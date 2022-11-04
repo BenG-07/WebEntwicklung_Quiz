@@ -264,6 +264,8 @@ $(document).ready(function () {
     answer4Button.click(() => { givenAnswers[index - 1] = 3; answerClick(); });
     restartButton.click(() => { init(); answerClick(); });
     endButton.click(() => { calculateResult(); });
+    saveButton.click(() => { saveQuiz(); });
+    loadButton.click(() => { loadQuiz(); });
     
     function init() {
         endButton.hide();
@@ -303,29 +305,28 @@ $(document).ready(function () {
 
     function answerClick() {
         updateAnswers();
-        console.log(givenAnswers);
     }
 
     function updateProgress(percent) {
         progressBar.css('width', percent + "%");
         progressBar.html(percent + "%");
+        if (percent == 100) {
+            endButton.show();
+        }
     }
 
     function updateAnswers() {
-        if (index == 10) {
-            endButton.show();
-            updateProgress(answeredQuestionsCount() * (100 / questionsForQuiz));
-            toggleButtons(index - 1);
+        updateProgress(answeredQuestionsCount() * (100 / questionsForQuiz));
 
-            return;
+        if (index > 9) {
+            index = 9;
         }
 
-        questionLabel.html(questions[index]);
+        questionLabel.html("Frage " + (index + 1) + "/" + questionsForQuiz + "<br>" + questions[index]);
         answer1Button.html(answers[index][0]);
         answer2Button.html(answers[index][1]);
         answer3Button.html(answers[index][2]);
         answer4Button.html(answers[index][3]);
-        updateProgress(answeredQuestionsCount() * (100 / questionsForQuiz));
 
         index++;
         toggleButtons(index - 1);
@@ -334,7 +335,7 @@ $(document).ready(function () {
     function answeredQuestionsCount() {
         var temp = 0;
         for (var i = 0; i < givenAnswers.length; i++) {
-            if (givenAnswers[i] != null) {
+            if (givenAnswers[i] != null && !isNaN(givenAnswers[i])) {
                 temp++;
             }
         }
@@ -397,9 +398,9 @@ $(document).ready(function () {
         var correctAnswers = 0;
         var answersResult = "";
         for (var i = 0; i < questionsForQuiz; i++) {
-            answersResult += "<br><br><br>question " + (i + 1) + ": " + questions[i];
-            answersResult += "<br>your answer: " + answers[i][givenAnswers[i]];
-            answersResult += "<br>rigth answer: " + answers[i][rightAnswers[i]];
+            answersResult += "<br><br><br>Frage " + (i + 1) + ": " + questions[i];
+            answersResult += "<br>Deine Antwort: " + answers[i][givenAnswers[i]];
+            answersResult += "<br>Richtige Antwort: " + answers[i][rightAnswers[i]];
             if (rightAnswers[i] == givenAnswers[i]) {
                 correctAnswers++;
             }
@@ -410,6 +411,31 @@ $(document).ready(function () {
         questionLabel.html(result + answersResult);
     }
 
+    function saveQuiz() {
+        for (var i = 0; i < questionsForQuiz; i++) {
+            localStorage.setItem('question' + i, questions[i]);
+            localStorage.setItem('answers' + i, answers[i]);
+            localStorage.setItem('rightAnswer' + i, rightAnswers[i]);
+            localStorage.setItem('givenAnswer' + i, givenAnswers[i]);
+        }
+        localStorage.setItem('index', index);
+    }
+
+    function loadQuiz() {
+        for (var i = 0; i < questionsForQuiz; i++) {
+            questions[i] = localStorage.getItem('question' + i);
+            var answersStrings = localStorage.getItem('answers' + i).split(',');
+            rightAnswers[i] = localStorage.getItem('rightAnswer' + i);
+            givenAnswers[i] = parseInt(localStorage.getItem('givenAnswer' + i));
+            for (var j = 0; j < 4; j++) {
+                answers[i][j] = answersStrings[j];
+            }
+        }
+        index = parseInt(localStorage.getItem('index')) - 1;
+
+        endButton.hide();
+        startQuiz();
+    }
 
 
 
